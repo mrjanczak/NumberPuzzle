@@ -1,5 +1,5 @@
 # NumberPuzzle
-Algorythm to find solution of 'Number Puzzle' - https://professorpuzzle.com/products/puzzles/einstein/number-puzzle/
+Algorythm to find solution of 'Number Puzzle' - logic game by Professor Puzzle (R) [https://professorpuzzle.com/products/puzzles/einstein/number-puzzle/]
 
 It arranges the numbers so that each line – horizontal, vertical and corner-to-corner diagonal – adds up to 264.
 
