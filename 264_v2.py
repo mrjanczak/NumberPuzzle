@@ -15,7 +15,7 @@ d_ = np.arange(n).tolist()
 # initial matrix of unit digits adders indexies
 u_ = [[],[],[],[]]
 
-num_T = {
+num_R = {
     11:11,
     16:91,
     18:81,
@@ -120,46 +120,66 @@ def sort_U(u_, t_, sort_i = 0):
 def fill_S(u_, t_):
     global S
 
-    # check if adder indexes are complete in rows, cols & diagonals
+    # check if adder indexes are complete in rows & diagonals
     correct = True
     for u in u_.tolist():
-        if collections.Counter(u) != collections.Counter([0,1,2,3]):
+        if collections.Counter(u) != collections.Counter(d_):
             correct = False
             break
 
     for t in t_.tolist():
-        if collections.Counter(t) != collections.Counter([0,1,2,3]):
+        if collections.Counter(t) != collections.Counter(d_):
             correct = False
             break
 
     t_T = np.rot90(t_)
     d2 = np.diag(t_T)   
-
     if collections.Counter(d2) != collections.Counter(d_):
         correct = False
 
     if not correct:
         return
 
-    # check if sum of diagonals is correct after rotation
+    # Calculate solutions
     s_ = np.zeros((n,n))
     for i in range(n):
         for j in range(n):
             num = 10 * (base + adder[t_[i][j]]) + (base + adder[u_[i][j]])
             s_[i][j] = num
 
-    s_T = np.zeros((n,n))
+
+    # calculate rotated matrix (with rotated digits)
+    s_R = np.zeros((n,n))
     for i in range(n):
         for j in range(n):                
-            s_T[i][j] = num_T[s_[i][j]]
-    s_T = np.rot90(s_T, 2)
+            s_R[i][j] = num_R[s_[i][j]]
+    s_R = np.rot90(s_R, 2)
 
-    d1_sum = np.diag(s_T).sum()
-    d2_sum = np.diag(np.rot90(s_T)).sum()   
-    if d1_sum == sum  and d2_sum == sum:
+
+    # check if sum of cols, rows & diagonals is correct (also after rotation by 180deg)
+    for s in s_.tolist():
+        if np.array(s).sum() != sum:
+            correct = False
+            break
+
+    for s in s_.transpose().tolist():
+        if np.array(s).sum() != sum:
+            correct = False
+            break
+
+    for s in s_R.tolist():
+        if np.array(s).sum() != sum:
+            correct = False
+            break
+
+    d1_sum = np.diag(s_).sum()
+    d2_sum = np.diag(np.rot90(s_)).sum()   
+    if d1_sum != sum  or d2_sum != sum:
+        correct = False
+        
+    if correct:    
         S.append(s_)
-
-    print(s_,'\n---------------')
+        print(s_,'\n---------------')
 
 c, r = (0, 0)
 fill_U(u_, c, r, c_, r_)
