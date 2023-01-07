@@ -2,9 +2,18 @@
 Algorythm to find solution of 'Number Puzzle' - logic game by Professor Puzzle (R) [https://professorpuzzle.com/products/puzzles/einstein/number-puzzle/]
 ![puzzle](https://user-images.githubusercontent.com/6569984/211147053-3c5defdf-7c0b-42fb-83f3-e276e0f9ff12.jpg)
 
-It arranges the numbers so that each line – horizontal, vertical and corner-to-corner diagonal – adds up to 264.
+- It arranges the numbers so that each line – horizontal, vertical and corner-to-corner diagonal – adds up to 264.
+- Each number is expressed as base + adder, e.g. 81 = 10*(6+2) + 1*(6-5), where 6 is a base and 2 & -5 are adders to tens and units respectively
+- In first step (fill_U) script tries to find all valid matrixes of 'unit adders' U which meet requirement of unique adders in each column, row and diagonal. Script stores indexies of adders instead of adders themselves (In 'tens adders' matrix T indexies grow with each row from 0 to 3)
+- In next step (sort_U) elements in U & T are shuffle within each column (excluding elements on diagonal) and if above requirement is met, solution is calculated and checked again, also for matrix rotated by 180 deg.
 
-Code is finding 48 solutions:
+For assumptions:
+```python
+base = 6
+adder = [-5,0,2,3]
+sum = 264
+```
+code gives back 48 solutions:
 
 	19. 98. 66. 81
 	86. 61. 99. 18
