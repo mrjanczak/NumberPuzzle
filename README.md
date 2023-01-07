@@ -4,7 +4,7 @@ Algorythm to find solution of 'Number Puzzle' - logic game by Professor Puzzle (
 
 - It arranges the numbers so that each line – horizontal, vertical and corner-to-corner diagonal – adds up to 264.
 - Each number is expressed as base + adder, e.g. 81 = 10*(6+2) + 1*(6-5), where 6 is a base and 2 & -5 are adders to tens and units respectively
-- In first step (fill_U) script tries to find all valid matrixes of 'unit adders' U which meet requirement of unique adders in each column, row and diagonal. Script stores indexies of adders instead of adders themselves (In 'tens adders' matrix T indexies grow with each row from 0 to 3)
+- In first step (fill_U) script tries to find all valid matrixes of 'unit adders' U which meet requirement of unique adders in each column, row and diagonal. Script stores indexes of adders instead of adders themselves (In 'tens adders' matrix T indexes grow with each row from 0 to 3)
 - In next step (sort_U) elements in U & T are shuffle within each column (excluding elements on diagonal) and if above requirement is met, solution is calculated and checked again, also for matrix rotated by 180 deg.
 
 For assumptions:
